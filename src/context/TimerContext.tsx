@@ -17,6 +17,8 @@ export interface TimerContextType {
   setQuizInterval: (interval: number) => void;
   quizzesPassed: number;
   incrementQuizzesPassed: () => void;
+  isActivePauseOpen: boolean;
+  setIsActivePauseOpen: (isOpen: boolean) => void;
 }
 
 const TimerContext = createContext<TimerContextType | undefined>(undefined);
@@ -179,6 +181,8 @@ export function TimerProvider({ children }: { children: React.ReactNode }) {
     setQuizInterval,
     quizzesPassed,
     incrementQuizzesPassed,
+    isActivePauseOpen,
+    setIsActivePauseOpen,
   };
 
   return (

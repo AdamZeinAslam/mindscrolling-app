@@ -53,16 +53,11 @@ function HomeContent() {
   const [expandedDesc, setExpandedDesc] = useState(false);
   const [maxIndexReached, setMaxIndexReached] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
-  const { quizInterval } = useTimer();
+  const { quizInterval, isActivePauseOpen } = useTimer();
 
   // Infinite Scroll State
   const [nextPageToken, setNextPageToken] = useState<string | undefined>(undefined);
   const [isFetchingMore, setIsFetchingMore] = useState(true); // Start true since we fetch on mount
-
-  // Active Pause State
-  const [showPause, setShowPause] = useState(false);
-  const [pauseTimer, setPauseTimer] = useState(60);
-  const [timeSpent, setTimeSpent] = useState(0);
 
   const [isMuted, setIsMuted] = useState(false);
 
@@ -76,7 +71,7 @@ function HomeContent() {
       if (isMuted) event.target.mute();
       else event.target.unMute();
 
-      if (index === currentIndex && !showPause && !showQuiz) {
+      if (index === currentIndex && !isActivePauseOpen && !showQuiz) {
         event.target.playVideo();
       } else {
         event.target.pauseVideo();
@@ -92,7 +87,7 @@ function HomeContent() {
       const player = playerRefs.current[i];
       if (player && typeof player.playVideo === 'function') {
         try {
-          if (i === currentIndex && !showPause && !showQuiz) {
+          if (i === currentIndex && !isActivePauseOpen && !showQuiz) {
             player.playVideo();
           } else {
             player.pauseVideo();
@@ -102,7 +97,7 @@ function HomeContent() {
         }
       }
     });
-  }, [currentIndex, showPause, showQuiz]);
+  }, [currentIndex, isActivePauseOpen, showQuiz]);
 
   const togglePlayPause = (index: number) => {
     const player = playerRefs.current[index];
@@ -177,35 +172,7 @@ function HomeContent() {
     }
   }, [videos.length, loading, isFetchingMore, nextPageToken]);
 
-  // Screen time tracking (Active Pause)
-  useEffect(() => {
-    if (showPause || showQuiz) return;
-    const interval = setInterval(() => {
-      setTimeSpent((prev) => {
-        const newTime = prev + 1;
-        // Trigger pause every 5 minutes (300 seconds)
-        if (newTime >= 300) {
-          setShowPause(true);
-          return 0;
-        }
-        return newTime;
-      });
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [showPause]);
 
-  // Pause Timer Countdown
-  useEffect(() => {
-    if (showPause) {
-      if (pauseTimer > 0) {
-        const timer = setTimeout(() => setPauseTimer(pauseTimer - 1), 1000);
-        return () => clearTimeout(timer);
-      } else {
-        setShowPause(false);
-        setPauseTimer(60);
-      }
-    }
-  }, [showPause, pauseTimer]);
 
   const scrollToNext = () => {
     if (containerRef.current && currentIndex < videos.length - 1) {
@@ -226,7 +193,7 @@ function HomeContent() {
   };
 
   const handleScroll = () => {
-    if (showPause && containerRef.current) {
+    if (isActivePauseOpen && containerRef.current) {
       containerRef.current.scrollTop = currentIndex * window.innerHeight;
       return;
     }
@@ -284,7 +251,7 @@ function HomeContent() {
     <div className="flex items-center justify-center min-h-[100dvh] bg-slate-50 dark:bg-slate-950 w-full overflow-hidden transition-colors duration-300">
       <div className="relative h-[100dvh] w-full max-w-[400px]">
         {/* External Navigation Buttons */}
-        {isMounted && !showPause && (
+        {isMounted && !isActivePauseOpen && (
           <div className="absolute left-[calc(100%+1.5rem)] top-1/2 -translate-y-1/2 z-40 hidden sm:flex flex-col gap-4">
             <button 
               onClick={scrollToPrev}
@@ -319,61 +286,7 @@ function HomeContent() {
           </button>
         </div>
 
-        {/* Active Pause Overlay */}
-        <AnimatePresence>
-          {showPause && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/95 backdrop-blur-xl p-8 text-center"
-            >
-              <motion.div 
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="mb-8 relative flex flex-col items-center justify-center"
-              >
-                <motion.div
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    y: [0, -10, 0]
-                  }}
-                  transition={{ 
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  className="relative flex items-center justify-center w-32 h-32"
-                >
-                   {/* Background aura */}
-                   <div className="absolute inset-0 bg-teal-500/20 rounded-full animate-pulse blur-xl" />
-                   <Accessibility className="w-20 h-20 text-teal-400 relative z-10 drop-shadow-[0_0_15px_rgba(45,212,191,0.5)]" />
-                </motion.div>
-                <div className="mt-4 flex items-center gap-2">
-                  <span className="text-5xl font-light text-slate-50">{pauseTimer}</span>
-                  <span className="text-xl text-teal-500/70 font-medium tracking-wider">SEC</span>
-                </div>
-              </motion.div>
-              <motion.h2 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="text-2xl font-medium mb-4 text-slate-100 tracking-wide"
-              >
-                Stretching Time!
-              </motion.h2>
-              <motion.p 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="text-base text-slate-400 max-w-xs leading-relaxed"
-              >
-                Stand up, stretch your arms, and rest your eyes. Learning is a marathon, not a sprint.
-              </motion.p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
 
         {/* Quiz Comprehension Check Overlay */}
         <QuizModal 
@@ -386,7 +299,7 @@ function HomeContent() {
         <div 
           ref={containerRef}
           onScroll={handleScroll}
-          className={`h-[100dvh] w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar relative ${(showPause || showQuiz) ? 'overflow-hidden' : ''}`}
+          className={`h-[100dvh] w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar relative ${(isActivePauseOpen || showQuiz) ? 'overflow-hidden' : ''}`}
         >
           {videos.map((video, index) => (
             <div 
