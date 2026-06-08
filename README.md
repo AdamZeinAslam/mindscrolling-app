@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 Nalar - Mindful Scrolling
 
-## Getting Started
+Welcome to **Nalar**! 🚀  
+Nalar is an educational video platform designed to facilitate focused learning through a TikTok-inspired infinite-scroll interface. Its core purpose is to prevent "doomscrolling" and encourage healthier study habits through interactive "Active Pause" interventions. 
 
-First, run the development server:
+Experience the application live here:  
+🔗 **[https://mindscrolling.vercel.app](https://mindscrolling.vercel.app)**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **🎓 Educational Infinite Scroll:** Enjoy high-quality, curated educational shorts without the distractions of a typical social media feed.
+- **🧘 Active Pauses:** Built-in wellness breaks with customizable stretching animations to ensure you rest your eyes and stretch your body. Learning is a marathon, not a sprint!
+- **🧠 Comprehension Quizzes:** Periodic quizzes to verify understanding and keep your mind sharp while scrolling.
+- **🌓 Dark/Light Mode:** A beautiful, responsive UI with seamless theme toggling to suit your preferences.
+- **📊 Usage Tracking:** Monitor your screen time, daily usage, and focus streaks right from your profile dashboard.
+- **⚙️ Custom Settings:** Personalize your experience by adjusting the frequency of quizzes and active pauses.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 How to Use the App
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Visit the Website:** Head over to [mindscrolling.vercel.app](https://mindscrolling.vercel.app).
+2. **Start Scrolling:** Scroll up and down to explore curated educational content just like you would on TikTok or YouTube Shorts.
+3. **Customize Your Experience:** Navigate to the **Profile / Settings** page to adjust your "Active Pause" intervals and Quiz frequencies to fit your study habits.
+4. **Take a Break:** When the "Active Pause" modal appears, follow the on-screen stretching animation and take a moment to rest. The video will automatically pause for you.
+5. **Test Your Knowledge:** Answer the periodic pop-up quizzes to maintain your focus streak and ensure you're actively learning!
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Frontend:** Next.js, React, Tailwind CSS, Framer Motion
+- **Animations:** Lottie React
+- **Video Playback:** React YouTube
+- **Backend/Curation:** Python, FastAPI, Google Cloud Run
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🤝 Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contributions, issues, and feature requests are welcome! Feel free to fork the repository and submit pull requests.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Built with ❤️ to encourage mindful learning.*
