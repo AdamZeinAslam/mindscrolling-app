@@ -113,13 +113,13 @@ export default function ProfilePage() {
             </div>
           </div>
           
-          <div className="flex-1 text-center md:text-left relative z-10">
-            <h2 className="text-2xl font-bold">{user.name}</h2>
-            <p className="text-slate-500 dark:text-slate-400 font-medium">{user.handle}</p>
+          <div className="flex-1 text-center md:text-left relative z-10 min-w-0 w-full">
+            <h2 className="text-2xl font-bold truncate">{user.name}</h2>
+            <p className="text-slate-500 dark:text-slate-400 font-medium truncate">{user.handle}</p>
             <p className="text-sm text-slate-400 dark:text-slate-500 mt-2">Joined {user.joined}</p>
           </div>
 
-          <div className="flex flex-col gap-4 justify-center items-center md:items-end relative z-10 mt-4 md:mt-0">
+          <div className="flex flex-col gap-3 justify-center items-center md:items-end relative z-10 mt-4 md:mt-0 w-full md:w-auto">
             <button
               onClick={() => {
                 setEditForm({ name: user.name, handle: user.handle });
@@ -129,8 +129,8 @@ export default function ProfilePage() {
             >
               Edit Profile
             </button>
-            <div className="bg-amber-500/10 border border-amber-500/20 text-amber-400 px-4 py-2 rounded-2xl flex items-center gap-2 font-semibold">
-              <Flame className="w-5 h-5 fill-amber-400" />
+            <div className="bg-amber-500/10 border border-amber-500/20 text-amber-400 px-4 py-2 rounded-2xl flex items-center justify-center gap-2 font-semibold w-full md:w-auto text-sm md:text-base">
+              <Flame className="w-4 h-4 md:w-5 md:h-5 fill-amber-400 shrink-0" />
               {streak} Day Streak
             </div>
           </div>
@@ -153,11 +153,11 @@ export default function ProfilePage() {
               </div>
               
               <div className="mt-4">
-                <p className="text-5xl md:text-6xl font-light tracking-tight text-slate-900 dark:text-white drop-shadow-sm font-mono">
+                <p className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight text-slate-900 dark:text-white drop-shadow-sm font-mono break-all sm:break-normal">
                   {formattedTime}
                 </p>
-                <div className="mt-6 flex items-center gap-2 text-sm text-teal-400/80 font-medium">
-                  <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+                <div className="mt-6 flex items-center gap-2 text-xs sm:text-sm text-teal-400/80 font-medium">
+                  <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse shrink-0" />
                   Actively tracking your focused learning
                 </div>
               </div>
@@ -169,14 +169,14 @@ export default function ProfilePage() {
             {stats.map((stat, idx) => {
               const Icon = stat.icon;
               return (
-                <div key={idx} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 flex items-start gap-4 shadow-sm">
-                  <div className={`p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 ${stat.color} shrink-0`}>
-                    <Icon className="w-6 h-6" />
+                <div key={idx} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 md:p-6 flex items-start gap-3 md:gap-4 shadow-sm w-full">
+                  <div className={`p-3 md:p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 ${stat.color} shrink-0`}>
+                    <Icon className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
-                  <div>
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white">{stat.value}</p>
-                    <p className="text-sm text-slate-700 dark:text-slate-300 font-bold mb-1">{stat.label}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pr-2">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white truncate">{stat.value}</p>
+                    <p className="text-sm text-slate-700 dark:text-slate-300 font-bold mb-1 truncate">{stat.label}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pr-2 line-clamp-2 md:line-clamp-none">
                       {stat.subtext}
                     </p>
                   </div>
@@ -200,7 +200,7 @@ export default function ProfilePage() {
           
           <div className="h-72 w-full mt-4">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorMinutes" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#818cf8" stopOpacity={0.4}/>
@@ -211,14 +211,14 @@ export default function ProfilePage() {
                 <XAxis 
                   dataKey="date" 
                   stroke="#475569" 
-                  fontSize={12} 
+                  fontSize={10} 
                   tickLine={false} 
                   axisLine={false}
                   dy={10} 
                 />
                 <YAxis 
                   stroke="#475569" 
-                  fontSize={12} 
+                  fontSize={10} 
                   tickLine={false} 
                   axisLine={false}
                   tickFormatter={(val) => `${val}m`}
