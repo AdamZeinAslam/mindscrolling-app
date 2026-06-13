@@ -30,9 +30,3 @@ Experience the application live here:
 - **Video Playback:** React YouTube
 - **Backend/Curation:** Python, FastAPI, Google Cloud Run
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to fork the repository and submit pull requests.
-
----
-*Built with ❤️ to encourage mindful learning.*
