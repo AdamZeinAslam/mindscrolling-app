@@ -23,7 +23,7 @@ Experience the application live here:
 4. **Take a Break:** When the "Active Pause" modal appears, follow the on-screen stretching animation and take a moment to rest. The video will automatically pause for you.
 5. **Test Your Knowledge:** Answer the periodic pop-up quizzes to maintain your focus streak and ensure you're actively learning!
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend:** Next.js, React, Tailwind CSS, Framer Motion
 - **Animations:** Lottie React
