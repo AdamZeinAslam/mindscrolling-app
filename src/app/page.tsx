@@ -129,7 +129,7 @@ function HomeContent() {
   const fetchVideos = async (token?: string) => {
     setIsFetchingMore(true);
     try {
-      const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://vtuber-258546516052.us-central1.run.app/curate-youtube-shorts';
+      const backendUrl = '/api/curate-youtube-shorts';
       const res = await fetch(backendUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
