@@ -27,5 +27,5 @@ Experience the application live here:
 
 - **Frontend:** Next.js, React, Tailwind CSS, Framer Motion
 - **Video Playback:** React YouTube
-- **Backend/Curation:** Python, FastAPI, Google Cloud Run
+- **Backend:** Python, FastAPI, Google Cloud Run
 
