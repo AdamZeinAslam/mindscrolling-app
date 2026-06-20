@@ -26,7 +26,6 @@ Experience the application live here:
 ## Tech Stack
 
 - **Frontend:** Next.js, React, Tailwind CSS, Framer Motion
-- **Animations:** Lottie React
 - **Video Playback:** React YouTube
 - **Backend/Curation:** Python, FastAPI, Google Cloud Run
 
